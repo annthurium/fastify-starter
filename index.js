@@ -1,28 +1,17 @@
-// ESM
-import Fastify from 'fastify'
+const fastify = require('fastify')({logger: true})
+const path = require('node:path')
 
-const fastify = Fastify({
-  logger: true
-})
-// // CommonJs
-// const fastify = require('fastify')({
-//   logger: true
-// })
-
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' }
+fastify.register(require('@fastify/static'), {
+  root: path.join(__dirname, 'static'),
+  prefix: '/static/', // optional: default '/'
 })
 
-/**
- * Run the server!
- */
-const start = async () => {
-  try {
-    await fastify.listen({ port: 3000 })
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-}
-start()
+fastify.get('/', function (req, reply) {
+  reply.sendFile('index.html') // serving path.join(__dirname, 'static', 'myHtml.html') directly
+})
 
+// Run the server!
+fastify.listen({ port: 3000 }, (err, address) => {
+    if (err) throw err
+    // Server is now listening on ${address}
+  })
