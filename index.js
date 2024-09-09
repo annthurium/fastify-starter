@@ -7,7 +7,7 @@ fastify.register(require('@fastify/static'), {
 })
 
 fastify.get('/', function (req, reply) {
-  reply.sendFile('index.html') // serving path.join(__dirname, 'static', 'myHtml.html') directly
+  reply.sendFile('student-index.html') // serving path.join(__dirname, 'static', 'myHtml.html') directly
 })
 
 // Run the server!
