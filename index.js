@@ -11,7 +11,7 @@ fastify.addHook("preParsing", async (request) => {
   const context = {
     kind: "user",
     key: "user-key-123abcde",
-    email: "foo@bar.com",
+    email: "biz@face.dev",
   };
 
   const flagKey = "show-student-version";
